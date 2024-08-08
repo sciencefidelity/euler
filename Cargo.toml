@@ -3,4 +3,17 @@ name = "euler"
 version = "0.1.0"
 edition = "2021"
 
+[lints.clippy]
+enum_glob_use = "deny"
+pedantic = { level = "deny", priority = 1 }
+nursery = { level = "deny", priority = 2 }
+unwrap_used = "deny"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+
 [dependencies]

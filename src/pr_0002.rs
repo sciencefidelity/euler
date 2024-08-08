@@ -3,8 +3,7 @@ pub struct Euler;
 impl Euler {
     pub fn even_fibonacci_numbers(limit: usize) -> usize {
         let mut sum = 0;
-        let mut iter = Self::fibonacci();
-        while let Some(num) = iter.next() {
+        for num in Self::fibonacci() {
             if num > limit {
                 break;
             }
