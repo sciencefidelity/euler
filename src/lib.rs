@@ -9,3 +9,6 @@ pub mod pr_0002;
 pub mod pr_0003;
 pub mod pr_0004;
 pub mod pr_0005;
+pub mod pr_0006;
+pub mod pr_0007;
+pub mod pr_0008;

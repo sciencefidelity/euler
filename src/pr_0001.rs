@@ -1,14 +1,14 @@
 pub struct Euler;
 
 impl Euler {
-    pub fn multiples_of_3_or_5(n: i32) -> i32 {
-        let mut sum = 0;
-        for i in 0..n {
-            if i % 3 == 0 || i % 5 == 0 {
-                sum += i;
-            }
-        }
-        sum
+    pub const fn multiples_of_3_or_5(target: i32) -> i32 {
+        Self::sum_divisible_by(target, 3) + Self::sum_divisible_by(target, 5)
+            - Self::sum_divisible_by(target, 15)
+    }
+
+    const fn sum_divisible_by(target: i32, n: i32) -> i32 {
+        let p = (target - 1) / n;
+        n * (p * (p + 1)) / 2
     }
 }
 
@@ -29,5 +29,10 @@ mod tests {
     #[test]
     fn case_3() {
         assert_eq!(233168, Euler::multiples_of_3_or_5(1000));
+    }
+
+    #[test]
+    fn case_4() {
+        assert_eq!(1493266668, Euler::multiples_of_3_or_5(80000));
     }
 }
