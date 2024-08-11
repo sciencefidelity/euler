@@ -9,7 +9,7 @@ impl Euler {
         let file = fs::read("src/pr_0008.txt").unwrap();
         let digits: Vec<u8> = file.trim_ascii_end().to_vec();
         let mut digits: Vec<i64> = digits.iter().map(|&x| i64::from(x)).collect();
-        for num in digits.iter_mut() {
+        for num in &mut digits {
             *num -= 48;
         }
         let mut max_product: i64 = 0;
