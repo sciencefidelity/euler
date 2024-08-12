@@ -1,3 +1,3 @@
 # Project Euler
 
-[projecteuler.net](https://projecteuler.net)
+[![Project Euler](https://projecteuler.net/profile/sciencefidelity.png)](https://projecteuler.net/)
