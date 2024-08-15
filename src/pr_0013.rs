@@ -33,12 +33,12 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(5537376230, Euler::large_sum("src/pr_0013.txt", 10));
+        assert_eq!(5_537_376_230, Euler::large_sum("src/pr_0013.txt", 10));
     }
 
     #[test]
     fn case_2() {
-        assert_eq!(55373, Euler::large_sum("src/pr_0013.txt", 5));
+        assert_eq!(55_373, Euler::large_sum("src/pr_0013.txt", 5));
     }
 
     #[test]
@@ -48,6 +48,9 @@ mod tests {
 
     #[test]
     fn case_4() {
-        assert_eq!(5537376230390876, Euler::large_sum("src/pr_0013.txt", 16));
+        assert_eq!(
+            5_537_376_230_390_876,
+            Euler::large_sum("src/pr_0013.txt", 16)
+        );
     }
 }

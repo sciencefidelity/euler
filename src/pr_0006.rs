@@ -25,6 +25,6 @@ mod tests {
 
     #[test]
     fn case_2() {
-        assert_eq!(25164150, Euler::sum_square_difference(100));
+        assert_eq!(25_164_150, Euler::sum_square_difference(100));
     }
 }

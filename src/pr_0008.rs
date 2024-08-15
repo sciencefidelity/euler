@@ -32,6 +32,6 @@ mod tests {
 
     #[test]
     fn case_2() {
-        assert_eq!(23514624000, Euler::largest_product_in_a_series(13));
+        assert_eq!(23_514_624_000, Euler::largest_product_in_a_series(13));
     }
 }

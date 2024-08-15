@@ -88,16 +88,16 @@ mod tests {
 
     #[test]
     fn case_2() {
-        assert_eq!(76576500, Euler::highly_divisible_triangular_number(500));
+        assert_eq!(76_576_500, Euler::highly_divisible_triangular_number(500));
     }
 
     // #[test]
     // fn case_3() {
-    //     assert_eq!(842161320, Euler::highly_divisible_triangular_number(1000));
+    //     assert_eq!(842_161_320, Euler::highly_divisible_triangular_number(1000));
     // }
     //
     // #[test]
     // fn case_4() {
-    //     assert_eq!(842161320, Euler::highly_divisible_triangular_number(10000));
+    //     assert_eq!(842_161_320, Euler::highly_divisible_triangular_number(10_000));
     // }
 }

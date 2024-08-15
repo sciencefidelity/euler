@@ -59,6 +59,6 @@ mod tests {
 
     #[test]
     fn case_3() {
-        assert_eq!(104743, Euler::nth_prime(10_001));
+        assert_eq!(104_743, Euler::nth_prime(10_001));
     }
 }

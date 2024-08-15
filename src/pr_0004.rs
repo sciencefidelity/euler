@@ -54,12 +54,12 @@ mod tests {
 
     #[test]
     fn case_2() {
-        assert_eq!(906609, Euler::largest_palindrome_product(3));
+        assert_eq!(906_609, Euler::largest_palindrome_product(3));
     }
 
     #[test]
     fn case_3() {
-        assert_eq!(99000099, Euler::largest_palindrome_product(4));
+        assert_eq!(99_000_099, Euler::largest_palindrome_product(4));
     }
 
     #[test]

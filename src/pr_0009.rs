@@ -20,6 +20,6 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(31875000, Euler::special_pythagorian_triplet(1000));
+        assert_eq!(31_875_000, Euler::special_pythagorian_triplet(1000));
     }
 }

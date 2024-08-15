@@ -17,3 +17,4 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
+rustc-hash = "2.0.0"

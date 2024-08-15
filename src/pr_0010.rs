@@ -57,6 +57,6 @@ mod tests {
 
     #[test]
     fn case_3() {
-        assert_eq!(142913828922, Euler::summation_of_primes(2_000_000));
+        assert_eq!(142_913_828_922, Euler::summation_of_primes(2_000_000));
     }
 }

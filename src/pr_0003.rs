@@ -19,11 +19,11 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(29, Euler::largest_prime_factor(13195));
+        assert_eq!(29, Euler::largest_prime_factor(13_195));
     }
 
     #[test]
     fn case_2() {
-        assert_eq!(6857, Euler::largest_prime_factor(600851475143));
+        assert_eq!(6857, Euler::largest_prime_factor(600_851_475_143));
     }
 }

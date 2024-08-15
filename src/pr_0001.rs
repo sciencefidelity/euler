@@ -28,11 +28,11 @@ mod tests {
 
     #[test]
     fn case_3() {
-        assert_eq!(233168, Euler::multiples_of_3_or_5(1000));
+        assert_eq!(233_168, Euler::multiples_of_3_or_5(1000));
     }
 
     #[test]
     fn case_4() {
-        assert_eq!(1493266668, Euler::multiples_of_3_or_5(80000));
+        assert_eq!(1_493_266_668, Euler::multiples_of_3_or_5(80_000));
     }
 }

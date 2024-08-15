@@ -35,7 +35,7 @@ mod tests {
 
     #[test]
     fn case_2() {
-        let sum: usize = 4613732;
+        let sum: usize = 4_613_732;
         assert_eq!(sum, Euler::even_fibonacci_numbers(4_000_000));
     }
 }

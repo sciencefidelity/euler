@@ -30,6 +30,6 @@ mod tests {
 
     #[test]
     fn case_2() {
-        assert_eq!(232792560, Euler::smallest_multiple(20));
+        assert_eq!(232_792_560, Euler::smallest_multiple(20));
     }
 }
