@@ -1,29 +1,20 @@
-use std::fs::File;
-use std::io::{self, BufRead};
 use std::path::Path;
+use utils::read_lines;
 
 pub struct Euler;
 
-const TRUNK_FACTOR: usize = 1_000;
+const TRUNK_FACTOR: usize = 1000;
 
 impl Euler {
     pub fn large_sum<P>(path: P, n: usize) -> usize
     where
         P: AsRef<Path>,
     {
-        Self::read_lines(path)
+        read_lines(path)
             .map(|line| line.ok().unwrap())
             .map(|s| s[0..=n].parse().unwrap_or(0))
             .sum::<usize>()
             / TRUNK_FACTOR
-    }
-
-    fn read_lines<P>(file: P) -> io::Lines<io::BufReader<File>>
-    where
-        P: AsRef<Path>,
-    {
-        let file = File::open(file).unwrap();
-        io::BufReader::new(file).lines()
     }
 }
 

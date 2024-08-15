@@ -6,7 +6,7 @@ impl Euler {
         digits.push(1);
         for _ in 0..n {
             let mut carry = 0;
-            for dx in digits.iter_mut() {
+            for dx in &mut digits {
                 let d = 2 * *dx + carry;
                 (carry, *dx) = (d / 10, d % 10);
             }

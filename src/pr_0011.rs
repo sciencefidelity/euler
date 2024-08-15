@@ -1,7 +1,6 @@
 use std::cmp::max;
-use std::fs::File;
-use std::io::{self, BufRead};
 use std::path::Path;
+use utils::read_lines;
 
 pub struct Euler;
 
@@ -47,23 +46,13 @@ impl Euler {
         const GRID_X: usize = 20;
         const GRID_Y: usize = 20;
         let mut grid = vec![vec![0; GRID_X]; GRID_Y];
-        if let Ok(lines) = Self::read_lines(file) {
-            for (i, line) in lines.map_while(Result::ok).enumerate() {
-                line.split_whitespace()
-                    .map(|n| n.parse().unwrap())
-                    .enumerate()
-                    .for_each(|(j, v)| grid[i][j] = v);
-            }
+        for (i, line) in read_lines(file).map_while(Result::ok).enumerate() {
+            line.split_whitespace()
+                .map(|n| n.parse().unwrap())
+                .enumerate()
+                .for_each(|(j, v)| grid[i][j] = v);
         }
         grid
-    }
-
-    fn read_lines<P>(file: P) -> io::Result<io::Lines<io::BufReader<File>>>
-    where
-        P: AsRef<Path>,
-    {
-        let file = File::open(file)?;
-        Ok(io::BufReader::new(file).lines())
     }
 }
 

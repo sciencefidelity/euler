@@ -1,7 +1,10 @@
 [package]
-name = "euler"
+name = "utils"
 version = "0.1.0"
 edition = "2021"
+
+[lints.rust]
+unsafe_code = "forbid"
 
 [lints.clippy]
 enum_glob_use = "deny"
@@ -17,4 +20,3 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
-utils = { path = "utils" }
