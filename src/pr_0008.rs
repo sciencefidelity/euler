@@ -5,8 +5,8 @@ const ASCII_OFFSET: i32 = 48;
 pub struct Euler;
 
 impl Euler {
-    pub fn largest_product_in_a_series(n: usize) -> i64 {
-        let file = fs::read("src/pr_0008.txt").unwrap();
+    pub fn largest_product_in_a_series(path: &str, n: usize) -> i64 {
+        let file = fs::read(path).unwrap();
         let digits: Vec<u8> = file.trim_ascii_end().to_vec();
         let mut digits: Vec<i64> = digits.iter().map(|&x| i64::from(x)).collect();
         for num in &mut digits {
@@ -27,11 +27,17 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(5832, Euler::largest_product_in_a_series(4));
+        assert_eq!(
+            5832,
+            Euler::largest_product_in_a_series("data/pr_0008.txt", 4)
+        );
     }
 
     #[test]
     fn case_2() {
-        assert_eq!(23_514_624_000, Euler::largest_product_in_a_series(13));
+        assert_eq!(
+            23_514_624_000,
+            Euler::largest_product_in_a_series("data/pr_0008.txt", 13)
+        );
     }
 }

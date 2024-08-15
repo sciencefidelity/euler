@@ -60,27 +60,25 @@ impl Euler {
 mod tests {
     use super::*;
 
+    const PATH: &str = "data/pr_0011.txt";
+
     #[test]
     fn case_1() {
-        let path = "src/pr_0011.txt";
-        assert_eq!(70_600_674, Euler::largest_product_in_a_grid(path, 4));
+        assert_eq!(70_600_674, Euler::largest_product_in_a_grid(PATH, 4));
     }
 
     #[test]
     fn case_2() {
-        let path = "src/pr_0011.txt";
-        assert_eq!(811_502, Euler::largest_product_in_a_grid(path, 3));
+        assert_eq!(811_502, Euler::largest_product_in_a_grid(PATH, 3));
     }
 
     #[test]
     fn case_3() {
-        let path = "src/pr_0011.txt";
-        assert_eq!(3_318_231_678, Euler::largest_product_in_a_grid(path, 5));
+        assert_eq!(3_318_231_678, Euler::largest_product_in_a_grid(PATH, 5));
     }
 
     #[test]
     fn case_4() {
-        let path = "src/pr_0011.txt";
-        assert_eq!(188_210_512_710, Euler::largest_product_in_a_grid(path, 6));
+        assert_eq!(188_210_512_710, Euler::largest_product_in_a_grid(PATH, 6));
     }
 }

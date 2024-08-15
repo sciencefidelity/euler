@@ -28,6 +28,6 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(871_198_282, Euler::names_scores("src/pr_0022.txt"));
+        assert_eq!(871_198_282, Euler::names_scores("data/pr_0022.txt"));
     }
 }

@@ -22,26 +22,25 @@ impl Euler {
 mod tests {
     use super::*;
 
+    const PATH: &str = "data/pr_0013.txt";
+
     #[test]
     fn case_1() {
-        assert_eq!(5_537_376_230, Euler::large_sum("src/pr_0013.txt", 10));
+        assert_eq!(5_537_376_230, Euler::large_sum(PATH, 10));
     }
 
     #[test]
     fn case_2() {
-        assert_eq!(55_373, Euler::large_sum("src/pr_0013.txt", 5));
+        assert_eq!(55_373, Euler::large_sum(PATH, 5));
     }
 
     #[test]
     fn case_3() {
-        assert_eq!(5, Euler::large_sum("src/pr_0013.txt", 1));
+        assert_eq!(5, Euler::large_sum(PATH, 1));
     }
 
     #[test]
     fn case_4() {
-        assert_eq!(
-            5_537_376_230_390_876,
-            Euler::large_sum("src/pr_0013.txt", 16)
-        );
+        assert_eq!(5_537_376_230_390_876, Euler::large_sum(PATH, 16));
     }
 }

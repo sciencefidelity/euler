@@ -38,11 +38,11 @@ mod tests {
 
     #[test]
     fn case_1() {
-        assert_eq!(23, Euler::maximum_path_sum_i("src/pr_0018_1.txt"));
+        assert_eq!(23, Euler::maximum_path_sum_i("data/pr_0018_1.txt"));
     }
 
     #[test]
     fn case_2() {
-        assert_eq!(1074, Euler::maximum_path_sum_i("src/pr_0018_2.txt"));
+        assert_eq!(1074, Euler::maximum_path_sum_i("data/pr_0018_2.txt"));
     }
 }
