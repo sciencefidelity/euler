@@ -1,21 +1,27 @@
 pub struct Euler;
 
 impl Euler {
-    pub const fn amicable_numbers<const N: usize>(n: usize) -> usize {
-        let (mut dict, mut sum, mut i) = ([0; N], 0, 1);
-        while i < n {
-            let spd = Self::sum_of_proper_divisors(i);
-            dict[i] = spd;
-            i += 1;
-        }
-        i = 0;
-        while i < n {
-            if dict[i] < n && dict[dict[i]] == i && i != dict[i] {
-                sum += i;
+    pub fn non_abundant_sums(n: usize) -> usize {
+        let mut abundant = Vec::new();
+        for i in 1..=n {
+            if Self::sum_of_proper_divisors(i) > i {
+                abundant.push(i);
             }
-            i += 1;
         }
-        sum
+        let m = abundant.len();
+        let mut sum_of_sum_abundant = 0;
+        let mut seen = vec![false; n + 1];
+        for i in 0..m {
+            for j in i..m {
+                let abundant_sum = abundant[i] + abundant[j];
+                if abundant_sum <= n && !seen[abundant_sum] {
+                    sum_of_sum_abundant += abundant_sum;
+                    seen[abundant_sum] = true;
+                }
+            }
+        }
+        let sum_of_all_nums = (1 + n) * n / 2;
+        sum_of_all_nums - sum_of_sum_abundant
     }
 
     const fn sum_of_proper_divisors(n: usize) -> usize {
@@ -54,18 +60,11 @@ mod tests {
 
     #[test]
     fn case_1() {
-        const TARGET: usize = 10_000;
-        assert_eq!(31626, Euler::amicable_numbers::<TARGET>(TARGET));
+        assert_eq!(4_179_871, Euler::non_abundant_sums(28_123));
     }
 
     #[test]
-    fn case_2() {
-        const TARGET: usize = 285;
-        assert_eq!(504, Euler::amicable_numbers::<TARGET>(TARGET));
-    }
-
-    #[test]
-    fn sum_of_proper_divisors_of_220() {
-        assert_eq!(284, Euler::sum_of_proper_divisors(220));
+    fn case_3() {
+        assert_eq!(10266, Euler::non_abundant_sums(200));
     }
 }
