@@ -7,13 +7,13 @@ impl Euler {
         assert!(n % 2 != 0);
         let (mut result, mut i, mut m, mut round) = (1, 2, 2, 1);
         while i <= n.pow(2) {
-            if round == 5 {
-                m += 2;
-                round = 1;
-            }
             if (i - 1) % m == 0 {
                 result += i;
                 round += 1;
+            }
+            if round == 5 {
+                m += 2;
+                round = 1;
             }
             i += 1;
         }

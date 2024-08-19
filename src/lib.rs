@@ -30,5 +30,8 @@ pub mod pr_0023;
 pub mod pr_0024;
 pub mod pr_0025;
 pub mod pr_0026;
+pub mod pr_0027;
 pub mod pr_0028;
+pub mod pr_0029;
+pub mod pr_0030;
 pub mod pr_0067;
