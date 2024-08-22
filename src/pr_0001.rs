@@ -1,14 +1,10 @@
+use math::sum_divisible_by;
+
 pub struct Euler;
 
 impl Euler {
-    pub const fn multiples_of_3_or_5(target: i32) -> i32 {
-        Self::sum_divisible_by(target, 3) + Self::sum_divisible_by(target, 5)
-            - Self::sum_divisible_by(target, 15)
-    }
-
-    const fn sum_divisible_by(target: i32, n: i32) -> i32 {
-        let p = (target - 1) / n;
-        n * (p * (p + 1)) / 2
+    pub fn multiples_of_3_or_5(target: i32) -> i32 {
+        sum_divisible_by(target, 3) + sum_divisible_by(target, 5) - sum_divisible_by(target, 15)
     }
 }
 
