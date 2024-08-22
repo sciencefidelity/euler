@@ -1,7 +1,10 @@
 [package]
-name = "euler"
+name = "math"
 version = "0.1.0"
 edition = "2021"
+
+[lints.rust]
+unsafe_code = "forbid"
 
 [lints.clippy]
 enum_glob_use = "deny"
@@ -17,5 +20,4 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
-math = { path = "math" }
-utils = { path = "utils" }
+num-traits = "0.2"
