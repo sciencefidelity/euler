@@ -1,9 +1,11 @@
+pub use seq;
+
 pub struct Euler;
 
 impl Euler {
     pub fn even_fibonacci_numbers(limit: usize) -> usize {
         let mut sum = 0;
-        for num in Self::fibonacci() {
+        for num in seq::fibonacci() {
             if num > limit {
                 break;
             }
@@ -12,14 +14,6 @@ impl Euler {
             }
         }
         sum
-    }
-
-    fn fibonacci() -> impl Iterator<Item = usize> {
-        let mut state = (0, 1);
-        std::iter::from_fn(move || {
-            state = (state.1, state.0 + state.1);
-            Some(state.0)
-        })
     }
 }
 

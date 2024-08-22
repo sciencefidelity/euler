@@ -1,16 +1,10 @@
+pub use math;
+
 pub struct Euler;
 
 impl Euler {
-    pub const fn sum_square_difference(n: i32) -> i32 {
-        Self::sum(n).pow(2) - Self::sum_of_squares(n)
-    }
-
-    const fn sum_of_squares(n: i32) -> i32 {
-        (2 * n + 1) * (n + 1) * n / 6
-    }
-
-    const fn sum(n: i32) -> i32 {
-        n * (n + 1) / 2
+    pub fn sum_square_difference(n: i32) -> i32 {
+        math::sum_to(n).pow(2) - math::sum_squares(n)
     }
 }
 

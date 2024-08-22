@@ -1,21 +1,10 @@
+pub use math;
+
 pub struct Euler;
 
 impl Euler {
     pub fn smallest_multiple(n: u64) -> u64 {
-        (1..=n).reduce(Self::lcm).unwrap_or(0)
-    }
-
-    /// Lowest Common Multiple
-    const fn lcm(a: u64, b: u64) -> u64 {
-        a * b / Self::gcd(a, b)
-    }
-
-    /// Greatest Common Divisor
-    const fn gcd(mut a: u64, mut b: u64) -> u64 {
-        while b != 0 {
-            (a, b) = (b, a % b);
-        }
-        a
+        (1..=n).reduce(math::lcm).unwrap_or(0)
     }
 }
 
