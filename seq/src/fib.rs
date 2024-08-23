@@ -11,7 +11,8 @@ impl<T> Fibonacci<T>
 where
     T: Num,
 {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             curr: Num::ZERO,
             next: Num::ONE,
@@ -29,6 +30,15 @@ where
         let current = self.curr;
         (self.curr, self.next) = (self.next, current + self.next);
         Some(current)
+    }
+}
+
+impl<T> Default for Fibonacci<T>
+where
+    T: Num,
+{
+    fn default() -> Self {
+        Self::new()
     }
 }
 

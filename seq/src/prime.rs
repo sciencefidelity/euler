@@ -11,6 +11,7 @@ impl<N> Prime<N>
 where
     N: PrimInt,
 {
+    #[must_use]
     pub fn new() -> Self {
         let one = N::one();
         let two = one + one;
@@ -51,6 +52,16 @@ where
     }
 }
 
+impl<N> Default for Prime<N>
+where
+    N: PrimInt,
+{
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+#[allow(clippy::module_name_repetitions)]
 pub fn is_prime<N: PrimInt>(candidate: N) -> bool {
     let (zero, one) = (N::zero(), N::one());
     let two = one + one;
