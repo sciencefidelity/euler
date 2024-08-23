@@ -2,6 +2,14 @@ use crate::Num;
 use std::ops::{Add, Div, Mul, Rem, Sub};
 
 /// Greatest Common Divisor.
+///
+/// Finds the greatest common divisor of two numbers.
+///
+/// ```
+/// # use math::gcd;
+///
+/// assert_eq!(gcd(24, 81), 3)
+/// ```
 pub fn gcd<T>(mut a: T, mut b: T) -> T
 where
     T: Rem<Output = T> + Num + Copy,
