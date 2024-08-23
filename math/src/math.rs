@@ -21,32 +21,32 @@ where
 }
 
 /// Sum Divisible By.
-pub fn sum_divisible_by<T>(target: T, n: T) -> T
+pub fn sum_divisible_by<T>(target: T, divisor: T) -> T
 where
     T: Div<Output = T> + Sub<Output = T> + Mul<Output = T> + Add<Output = T> + Copy + Num,
 {
-    let p = (target - Num::ONE) / n;
-    n * (p * (p + Num::ONE)) / Num::TWO
+    let p = (target - Num::ONE) / divisor;
+    divisor * (p * (p + Num::ONE)) / Num::TWO
 }
 
 /// Sum squares.
 ///
 /// Sum of the squares of first natural numbers to n.
-pub fn sum_squares<T>(n: T) -> T
+pub fn sum_squares<T>(target: T) -> T
 where
     T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + Num,
 {
-    (<T as Num>::TWO * n + Num::ONE) * (n + Num::ONE) * n / Num::SIX
+    (<T as Num>::TWO * target + Num::ONE) * (target + Num::ONE) * target / Num::SIX
 }
 
 /// Sum to.
 ///
 /// Sum of first natural numbers to n.
-pub fn sum_to<T>(n: T) -> T
+pub fn sum_to<T>(target: T) -> T
 where
     T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + Num,
 {
-    n * (n + Num::ONE) / Num::TWO
+    target * (target + Num::ONE) / Num::TWO
 }
 
 // TODO: allow for tolerance in tests with floats.

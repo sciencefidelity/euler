@@ -20,4 +20,5 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
+math = { path = "../math" }
 num-traits = "0.2"

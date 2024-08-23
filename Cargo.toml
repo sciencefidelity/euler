@@ -17,6 +17,7 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
+iter = { path = "iter" }
 math = { path = "math" }
 seq = { path = "seq" }
 utils = { path = "utils" }
