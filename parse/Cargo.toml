@@ -1,7 +1,10 @@
 [package]
-name = "euler"
+name = "parse"
 version = "0.1.0"
 edition = "2021"
+
+[lints.rust]
+unsafe_code = "forbid"
 
 [lints.clippy]
 enum_glob_use = "deny"
@@ -17,9 +20,3 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
-iter = { path = "iter" }
-math = { path = "math" }
-parse = { path = "parse" }
-seq = { path = "seq" }
-traits = { path = "traits" }
-utils = { path = "utils" }

@@ -14,7 +14,9 @@ version = "0.1.0"
 dependencies = [
  "iter",
  "math",
+ "parse",
  "seq",
+ "traits",
  "utils",
 ]
 
@@ -43,12 +45,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "parse"
+version = "0.1.0"
+
+[[package]]
 name = "seq"
 version = "0.1.0"
 dependencies = [
  "math",
  "num-traits",
 ]
+
+[[package]]
+name = "traits"
+version = "0.1.0"
 
 [[package]]
 name = "utils"
