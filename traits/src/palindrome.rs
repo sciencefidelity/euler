@@ -1,129 +1,82 @@
 pub trait Palindrome {
-    type Item;
+    /// Returns `true` if the number is palindromic.
+    ///
+    /// # example
+    ///
+    /// ```rust
+    /// # use traits::Palindrome;
+    ///
+    /// assert!(121.is_palindrome(10));
+    /// assert!(!122.is_palindrome(10));
+    /// ```
+    fn is_palindrome(&self, base: Self) -> bool;
 
-    fn is_palindromic(&self) -> bool;
+    /// Creates a palindromic number from `self` based on the `radix`.
+    ///
+    /// # example
+    ///
+    /// ```rust
+    /// # use traits::Palindrome;
+    ///
+    /// assert_eq!(15855, 123.into_palindrome(2, false));
+    /// assert_eq!(7919, 123.into_palindrome(2, true));
+    /// assert_eq!(123321, 123.into_palindrome(10, false));
+    /// assert_eq!(12321, 123.into_palindrome(10, true));
+    /// ```
+    fn into_palindrome(&self, base: Self, odd_length: bool) -> Self;
 }
 
-impl Palindrome for &str {
-    type Item = Self;
-
-    fn is_palindromic(&self) -> bool {
-        let mut chars = self.chars().filter(|c| c.is_alphanumeric());
-        while let (Some(c1), Some(c2)) = (chars.next(), chars.next_back()) {
-            if !c1.eq_ignore_ascii_case(&c2) {
-                return false;
-            }
-        }
-        true
-    }
-}
-
-impl Palindrome for String {
-    type Item = Self;
-
-    fn is_palindromic(&self) -> bool {
-        let mut chars = self.chars().filter(|c| c.is_alphanumeric());
-        while let (Some(c1), Some(c2)) = (chars.next(), chars.next_back()) {
-            if !c1.eq_ignore_ascii_case(&c2) {
-                return false;
-            }
-        }
-        true
-    }
-}
-
-macro_rules! signed_impl {
-    ($t:ty) => {
+macro_rules! int_impl {
+    ($($t:ty)*) => ($(
         impl Palindrome for $t {
-            type Item = Self;
-
-            fn is_palindromic(&self) -> bool {
-                if *self < 0 {
-                    return false;
-                }
-                let (mut tmp, mut rev) = (*self, 0);
-                while tmp != 0 {
-                    rev = rev * 10 + tmp % 10;
-                    tmp /= 10;
+            fn is_palindrome(&self, radix: Self) -> bool {
+                debug_assert!(*self > 0, "negative numbers cannot be palindromic");
+                debug_assert!(radix == 2 || radix == 10, "radix must be base 2 or base 10");
+                let (mut k, mut rev) = (*self, 0);
+                while k != 0 {
+                    rev = rev * radix + k % radix;
+                    k /= radix;
                 }
                 *self == rev
             }
-        }
-    };
-}
 
-macro_rules! unsigned_impl {
-    ($t:ty) => {
-        impl Palindrome for $t {
-            type Item = Self;
-
-            fn is_palindromic(&self) -> bool {
-                let (mut tmp, mut rev) = (*self, 0);
-                while tmp != 0 {
-                    rev = rev * 10 + tmp % 10;
-                    tmp /= 10;
+            #[inline]
+            fn into_palindrome(&self, radix: Self, odd_length: bool) -> Self {
+                debug_assert!(*self > 0, "negative numbers cannot be palindromic");
+                debug_assert!(radix == 2 || radix == 10, "radix must be base 2 or base 10");
+                let (mut n, mut res) = (*self, *self);
+                if odd_length {
+                    n /= radix;
                 }
-                *self == rev
+                while n > 0 {
+                    res = radix * res + n % radix;
+                    n /= radix;
+                }
+                res
             }
         }
-    };
+    )*)
 }
 
-signed_impl!(isize);
-signed_impl!(i8);
-signed_impl!(i16);
-signed_impl!(i32);
-signed_impl!(i64);
-signed_impl!(i128);
-
-unsigned_impl!(usize);
-unsigned_impl!(u8);
-unsigned_impl!(u16);
-unsigned_impl!(u32);
-unsigned_impl!(u64);
-unsigned_impl!(u128);
+int_impl! { isize i8 i16 i32 i64 i128 usize u8 u16 u32 u64 u128 }
 
 #[cfg(test)]
 mod tests {
     use super::Palindrome;
 
     #[test]
-    fn test_is_palindrome_string_slice() {
-        assert!("1001001001".is_palindromic());
+    fn test_is_palindrome() {
+        assert!(585.is_palindrome(10));
+        assert!(585.is_palindrome(2));
+        assert!(!586.is_palindrome(10));
+        assert!(!586.is_palindrome(2));
     }
 
     #[test]
-    fn test_is_not_palindrome_string_slice() {
-        assert!(!"1001101001".is_palindromic());
-    }
-
-    #[test]
-    fn test_is_palindrome_string() {
-        assert!("1001001001".to_owned().is_palindromic());
-    }
-
-    #[test]
-    fn test_is_not_palindrome_string() {
-        assert!(!"1001101001".to_owned().is_palindromic());
-    }
-
-    #[test]
-    fn test_is_palindrome_i32() {
-        assert!(585_i32.is_palindromic());
-    }
-
-    #[test]
-    fn test_is_palindrome_u32() {
-        assert!(585_u32.is_palindromic());
-    }
-
-    #[test]
-    fn test_is_not_palindrome_i32() {
-        assert!(!586_i32.is_palindromic());
-    }
-
-    #[test]
-    fn test_is_not_palindrome_u32() {
-        assert!(!586_u32.is_palindromic());
+    fn test_make_palindrome() {
+        assert_eq!(15855, 123.into_palindrome(2, false));
+        assert_eq!(7919, 123.into_palindrome(2, true));
+        assert_eq!(123321, 123.into_palindrome(10, false));
+        assert_eq!(12321, 123.into_palindrome(10, true));
     }
 }

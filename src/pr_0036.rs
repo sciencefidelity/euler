@@ -1,18 +1,29 @@
-use parse::int_to_binary_string;
 use traits::Palindrome;
 
 pub struct Euler;
 
 impl Euler {
-    pub fn double_base_palindromes(target: i32) -> i32 {
-        let mut result = 0;
-        for i in 1..target {
-            let binary = int_to_binary_string(i);
-            if i.is_palindromic() && binary.is_palindromic() {
-                result += i;
+    pub fn double_base_palindromes(limit: u32) -> u32 {
+        let (mut i, mut sum) = (1, 0);
+        let mut p = i.into_palindrome(2, true);
+        while p < limit {
+            if p.is_palindrome(10) {
+                sum += p;
             }
+            i += 1;
+            p = i.into_palindrome(2, true);
         }
-        result
+
+        i = 1;
+        let mut p = i.into_palindrome(2, false);
+        while p < limit {
+            if p.is_palindrome(10) {
+                sum += p;
+            }
+            i += 1;
+            p = i.into_palindrome(2, false);
+        }
+        sum
     }
 }
 
