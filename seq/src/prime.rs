@@ -67,6 +67,9 @@ pub fn is_prime<N: PrimInt>(candidate: N) -> bool {
     let two = one + one;
     let three = one + two;
     if candidate <= one {
+        return false;
+    }
+    if [two, three].contains(&candidate) {
         return true;
     }
     if candidate % two == zero {

@@ -36,22 +36,20 @@ mod tests {
     #[test]
     fn test_split_digits() {
         assert_eq!(Euler::split_digits(145), vec![5, 4, 1]);
+        assert_eq!(Euler::split_digits(40_585), vec![4, 0, 5, 8, 5]);
     }
 
     #[test]
     fn test_sum_factorials_of_digits() {
         let digits = Euler::split_digits(145);
         assert_eq!(Euler::sum_factorial_of_digits(digits), 145);
-    }
 
-    #[test]
-    fn test_sum_factorials_of_digits_b() {
         let digits = Euler::split_digits(40_585);
         assert_eq!(Euler::sum_factorial_of_digits(digits), 40_585);
     }
 
     #[test]
-    fn case_1() {
+    fn test_digit_factorials() {
         assert_eq!(Euler::digit_factorials(), 40_730);
     }
 }
