@@ -13,7 +13,7 @@ impl Euler {
             }
             digits.into_iter().rev().for_each(|d| {
                 constant.push(d);
-            })
+            });
         }
         let mut result = constant[NTH[0]];
         for n in NTH.iter().skip(1) {

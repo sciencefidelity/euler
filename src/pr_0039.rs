@@ -29,7 +29,7 @@ impl Euler {
         count
     }
 
-    fn is_pythagorean_triplet(triplet: (i32, i32, i32)) -> bool {
+    const fn is_pythagorean_triplet(triplet: (i32, i32, i32)) -> bool {
         triplet.0.pow(2) + triplet.1.pow(2) == triplet.2.pow(2)
     }
 }

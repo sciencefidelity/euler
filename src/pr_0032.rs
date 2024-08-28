@@ -21,7 +21,7 @@ impl Euler {
         let mut digits = vec![-1; k + 1];
         digits[0] = 0;
         let mut product = multiplicand * multiplier;
-        for n in vec![&mut multiplicand, &mut multiplier, &mut product] {
+        for n in [&mut multiplicand, &mut multiplier, &mut product] {
             while *n != 0 {
                 let digit = *n % 10;
                 if digit < 1 || digit > i32::try_from(k).unwrap() {

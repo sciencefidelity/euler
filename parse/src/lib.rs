@@ -1,3 +1,4 @@
+#[must_use]
 pub fn int_to_binary_string(n: i32) -> String {
     format!("{n:b}")
 }

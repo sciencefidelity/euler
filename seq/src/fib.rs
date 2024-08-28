@@ -1,6 +1,5 @@
+use num_traits::{one, zero, One, Zero};
 use std::ops::Add;
-
-use math::Num;
 
 pub struct Fibonacci<T> {
     curr: T,
@@ -9,20 +8,20 @@ pub struct Fibonacci<T> {
 
 impl<T> Fibonacci<T>
 where
-    T: Num,
+    T: Zero + One,
 {
     #[must_use]
-    pub const fn new() -> Self {
+    pub fn new() -> Self {
         Self {
-            curr: Num::ZERO,
-            next: Num::ONE,
+            curr: zero(),
+            next: one(),
         }
     }
 }
 
 impl<T> Iterator for Fibonacci<T>
 where
-    T: Add<Output = T> + Copy + Num,
+    T: Add<Output = T> + Copy + One + Zero,
 {
     type Item = T;
 
@@ -35,7 +34,7 @@ where
 
 impl<T> Default for Fibonacci<T>
 where
-    T: Num,
+    T: One + Zero,
 {
     fn default() -> Self {
         Self::new()

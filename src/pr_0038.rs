@@ -56,25 +56,25 @@ mod tests {
 
     #[test]
     fn test_is_pandigital() {
-        assert!(Euler::is_pandigital(192384576));
-        assert!(Euler::is_pandigital(123456789));
-        assert!(Euler::is_pandigital(987654321));
-        assert!(Euler::is_pandigital(381654729));
+        assert!(Euler::is_pandigital(192_384_576));
+        assert!(Euler::is_pandigital(123_456_789));
+        assert!(Euler::is_pandigital(987_654_321));
+        assert!(Euler::is_pandigital(381_654_729));
 
         assert!(!Euler::is_pandigital(123));
-        assert!(!Euler::is_pandigital(1234567890));
-        assert!(!Euler::is_pandigital(380654729));
+        assert!(!Euler::is_pandigital(1_234_567_890));
+        assert!(!Euler::is_pandigital(380_654_729));
     }
 
     #[test]
     fn test_into_pandigital() {
-        assert_eq!(Euler::into_pandigital(192), 192384576);
-        assert_eq!(Euler::into_pandigital(9), 918273645);
-        assert_eq!(Euler::into_pandigital(1), 123456789);
+        assert_eq!(Euler::into_pandigital(192), 192_384_576);
+        assert_eq!(Euler::into_pandigital(9), 918_273_645);
+        assert_eq!(Euler::into_pandigital(1), 123_456_789);
     }
 
     #[test]
     fn test_pandigital_multiples() {
-        assert_eq!(Euler::pandigital_multiples(10_000), 932718654);
+        assert_eq!(Euler::pandigital_multiples(10_000), 932_718_654);
     }
 }

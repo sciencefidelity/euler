@@ -17,7 +17,7 @@ impl Euler {
                 result += 1;
                 continue;
             }
-            if p.into_iter().take(n - 1).all(|r| is_prime(r)) {
+            if p.into_iter().take(n - 1).all(is_prime) {
                 result += 1;
             }
         }

@@ -1,15 +1,14 @@
-use math::Num;
-use num_traits::Pow;
+use num_traits::{one, zero, One, Pow, PrimInt, Zero};
 use std::ops::{Add, DivAssign, Mul, Rem};
 
 pub fn count_digits_in_number<T>(n: T) -> usize
 where
-    T: DivAssign + Num,
+    T: DivAssign + Zero + One,
 {
     let mut n = n;
-    let mut result = Num::ZERO;
-    while n != Num::ZERO {
-        n /= Num::TEN;
+    let mut result = zero();
+    while !n.is_zero() {
+        n /= one::<T>() + one() + one() + one() + one() + one() + one() + one() + one() + one();
         result += 1;
     }
     result
@@ -28,9 +27,10 @@ where
         + Copy
         + DivAssign
         + Mul<Output = T>
-        + Num
+        + One
         + Pow<u32, Output = T>
-        + Rem<Output = T>,
+        + Rem<Output = T>
+        + Zero,
 {
     pub fn new(num: T) -> Self {
         let length = count_digits_in_number(num);
@@ -47,15 +47,19 @@ where
     }
 
     pub fn is_empty(&self) -> bool {
-        self.original == Num::ZERO
+        self.original.is_zero()
     }
 
     pub fn rotate(&mut self) {
         let n = u32::try_from(self.len()).unwrap();
-        let multiplier: T = Num::TEN;
-        let rem = self.current % Num::TEN;
-        self.current /= Num::TEN;
+        let multiplier: T = Self::ten();
+        let rem = self.current % Self::ten();
+        self.current /= Self::ten();
         self.current = rem * multiplier.pow(n - 1) + self.current;
+    }
+
+    pub fn ten() -> T {
+        one::<T>() + one() + one() + one() + one() + one() + one() + one() + one() + one()
     }
 }
 
@@ -65,9 +69,11 @@ where
         + Copy
         + DivAssign
         + Mul<Output = T>
-        + Num
+        + One
         + Pow<u32, Output = T>
-        + Rem<Output = T>,
+        + PrimInt
+        + Rem<Output = T>
+        + Zero,
 {
     type Item = T;
 

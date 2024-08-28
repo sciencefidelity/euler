@@ -23,7 +23,7 @@ pub trait Palindrome {
     /// assert_eq!(123321, 123.into_palindrome(10, false));
     /// assert_eq!(12321, 123.into_palindrome(10, true));
     /// ```
-    fn into_palindrome(&self, base: Self, odd_length: bool) -> Self;
+    fn into_palindrome(self, base: Self, odd_length: bool) -> Self;
 }
 
 macro_rules! int_impl {
@@ -41,10 +41,10 @@ macro_rules! int_impl {
             }
 
             #[inline]
-            fn into_palindrome(&self, radix: Self, odd_length: bool) -> Self {
-                debug_assert!(*self > 0, "negative numbers cannot be palindromic");
+            fn into_palindrome(self, radix: Self, odd_length: bool) -> Self {
+                debug_assert!(self > 0, "negative numbers cannot be palindromic");
                 debug_assert!(radix == 2 || radix == 10, "radix must be base 2 or base 10");
-                let (mut n, mut res) = (*self, *self);
+                let (mut n, mut res) = (self, self);
                 if odd_length {
                     n /= radix;
                 }

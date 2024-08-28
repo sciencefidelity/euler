@@ -1,4 +1,4 @@
-use crate::Num;
+use num_traits::{one, One, Zero};
 use std::ops::{Add, Div, Mul, Rem, Sub};
 
 /// Greatest Common Divisor.
@@ -12,9 +12,9 @@ use std::ops::{Add, Div, Mul, Rem, Sub};
 /// ```
 pub fn gcd<T>(mut a: T, mut b: T) -> T
 where
-    T: Rem<Output = T> + Num + Copy,
+    T: Rem<Output = T> + Copy + Zero,
 {
-    while b != Num::ZERO {
+    while !b.is_zero() {
         (a, b) = (b, a % b);
     }
     a
@@ -23,7 +23,7 @@ where
 /// Lowest Common Multiple
 pub fn lcm<T>(a: T, b: T) -> T
 where
-    T: Div<Output = T> + Mul<Output = T> + Rem<Output = T> + Num + Copy,
+    T: Div<Output = T> + Mul<Output = T> + Rem<Output = T> + Copy + Zero,
 {
     a * b / gcd::<T>(a, b)
 }
@@ -31,10 +31,10 @@ where
 /// Sum Divisible By.
 pub fn sum_divisible_by<T>(target: T, divisor: T) -> T
 where
-    T: Div<Output = T> + Sub<Output = T> + Mul<Output = T> + Add<Output = T> + Copy + Num,
+    T: Div<Output = T> + Sub<Output = T> + Mul<Output = T> + Add<Output = T> + Copy + One,
 {
-    let p = (target - Num::ONE) / divisor;
-    divisor * (p * (p + Num::ONE)) / Num::TWO
+    let p = (target - one()) / divisor;
+    divisor * (p * (p + one())) / (one::<T>() + one())
 }
 
 /// Sum squares.
@@ -42,9 +42,11 @@ where
 /// Sum of the squares of first natural numbers to n.
 pub fn sum_squares<T>(target: T) -> T
 where
-    T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + Num,
+    T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + One,
 {
-    (<T as Num>::TWO * target + Num::ONE) * (target + Num::ONE) * target / Num::SIX
+    let two = one::<T>() + one();
+    let six = two + two + two;
+    (two * target + one()) * (target + one()) * target / six
 }
 
 /// Sum to.
@@ -52,9 +54,9 @@ where
 /// Sum of first natural numbers to n.
 pub fn sum_to<T>(target: T) -> T
 where
-    T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + Num,
+    T: Add<Output = T> + Div<Output = T> + Mul<Output = T> + Copy + One,
 {
-    target * (target + Num::ONE) / Num::TWO
+    target * (target + one()) / (one::<T>() + one())
 }
 
 // TODO: allow for tolerance in tests with floats.

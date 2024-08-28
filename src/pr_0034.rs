@@ -7,7 +7,7 @@ impl Euler {
         let mut result = 0;
         for i in 10..50_000 {
             let digits = Self::split_digits(i);
-            if i == Self::sum_factorial_of_digits(digits) {
+            if i == Self::sum_factorial_of_digits(&digits) {
                 result += i;
             }
         }
@@ -24,7 +24,7 @@ impl Euler {
         digits
     }
 
-    fn sum_factorial_of_digits(v: Vec<usize>) -> usize {
+    fn sum_factorial_of_digits(v: &[usize]) -> usize {
         v.iter().map(|d| FACTORIALS[*d]).sum()
     }
 }
@@ -36,16 +36,16 @@ mod tests {
     #[test]
     fn test_split_digits() {
         assert_eq!(Euler::split_digits(145), vec![5, 4, 1]);
-        assert_eq!(Euler::split_digits(40_585), vec![4, 0, 5, 8, 5]);
+        assert_eq!(Euler::split_digits(40_585), vec![5, 8, 5, 0, 4]);
     }
 
     #[test]
     fn test_sum_factorials_of_digits() {
         let digits = Euler::split_digits(145);
-        assert_eq!(Euler::sum_factorial_of_digits(digits), 145);
+        assert_eq!(Euler::sum_factorial_of_digits(&digits), 145);
 
         let digits = Euler::split_digits(40_585);
-        assert_eq!(Euler::sum_factorial_of_digits(digits), 40_585);
+        assert_eq!(Euler::sum_factorial_of_digits(&digits), 40_585);
     }
 
     #[test]
