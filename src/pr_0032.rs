@@ -8,7 +8,6 @@ impl Euler {
         for i in 1..50 {
             for j in 1..=2000 {
                 if Self::is_pandigital(k, i, j) {
-                    println!("{i} * {j} = {}", i * j);
                     set.insert(i * j);
                 }
             }
