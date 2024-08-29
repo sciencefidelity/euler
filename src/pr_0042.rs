@@ -12,16 +12,15 @@ impl Euler {
     {
         let data = fs::read(path).expect("failed to open file");
         let (mut word_val, mut count) = (0, 0);
-        for b in data.iter() {
+        for b in data {
             match b {
-                b'"' if word_val != 0 => {
+                b'"' | b',' if word_val == 0 => {}
+                b'"' => {
                     if word_val.is_triangle() {
                         count += 1;
                     }
                     word_val = 0;
                 }
-                b'"' => {}
-                b',' => {}
                 _ if b.is_ascii_alphabetic() => word_val += u32::from(b - BYTE_OFFSET),
                 _ => {}
             }
