@@ -1,7 +1,11 @@
+#![allow(clippy::cast_lossless, clippy::cast_precision_loss)]
+
 pub trait Integer<T> {
     const MAX_PANDIGITAL: Self;
 
     fn is_pandigital(&self) -> bool;
+
+    fn is_triangle(&self) -> bool;
 }
 
 macro_rules! int_impl {
@@ -25,6 +29,13 @@ macro_rules! int_impl {
                     len += 1;
                 }
                 !has_digits[1..=len].contains(&false)
+            }
+
+            fn is_triangle(&self) -> bool {
+                if *self <= 0 {
+                    return false;
+                }
+                (*self as f64).mul_add(8.0, 1.0).sqrt().fract() == 0.0
             }
         }
     };
@@ -52,6 +63,10 @@ macro_rules! uint_impl {
                     len += 1;
                 }
                 !has_digits[1..=len].contains(&false)
+            }
+
+            fn is_triangle(&self) -> bool {
+                (*self as f64).mul_add(8.0, 1.0).sqrt().fract() == 0.0
             }
         }
     };
@@ -168,5 +183,37 @@ mod tests {
         assert!(!876_543_210_usize.is_pandigital());
         assert!(!usize::MAX.is_pandigital());
         assert!(!usize::MIN.is_pandigital());
+    }
+
+    #[test]
+    fn test_is_triangle_number() {
+        assert!(1_i8.is_triangle());
+        assert!(3_i16.is_triangle());
+        assert!(6_i32.is_triangle());
+        assert!(10_i64.is_triangle());
+        assert!(15_i128.is_triangle());
+        assert!(21_isize.is_triangle());
+        assert!(28_u8.is_triangle());
+        assert!(36_u16.is_triangle());
+        assert!(45_u32.is_triangle());
+        assert!(55_u64.is_triangle());
+        assert!(66_u128.is_triangle());
+        assert!(78_usize.is_triangle());
+    }
+
+    #[test]
+    fn test_is_not_triangle_number() {
+        assert!(!2_i8.is_triangle());
+        assert!(!4_i16.is_triangle());
+        assert!(!7_i32.is_triangle());
+        assert!(!11_i64.is_triangle());
+        assert!(!16_i128.is_triangle());
+        assert!(!22_isize.is_triangle());
+        assert!(!29_u8.is_triangle());
+        assert!(!37_u16.is_triangle());
+        assert!(!46_u32.is_triangle());
+        assert!(!56_u64.is_triangle());
+        assert!(!67_u128.is_triangle());
+        assert!(!79_usize.is_triangle());
     }
 }
