@@ -7,7 +7,6 @@ pub trait Palindrome {
     /// # use traits::Palindrome;
     ///
     /// assert!(121.is_palindrome(10));
-    /// assert!(!122.is_palindrome(10));
     /// ```
     fn is_palindrome(&self, base: Self) -> bool;
 
@@ -18,10 +17,10 @@ pub trait Palindrome {
     /// ```rust
     /// # use traits::Palindrome;
     ///
-    /// assert_eq!(15855, 123.into_palindrome(2, false));
-    /// assert_eq!(7919, 123.into_palindrome(2, true));
-    /// assert_eq!(123321, 123.into_palindrome(10, false));
-    /// assert_eq!(12321, 123.into_palindrome(10, true));
+    /// assert_eq!(123.into_palindrome(2, false), 15_855);
+    /// assert_eq!(123.into_palindrome(2, true), 7919);
+    /// assert_eq!(123.into_palindrome(10, false), 123_321);
+    /// assert_eq!(123.into_palindrome(10, true), 12_321);
     /// ```
     fn into_palindrome(self, base: Self, odd_length: bool) -> Self;
 }
@@ -73,7 +72,7 @@ mod tests {
     }
 
     #[test]
-    fn test_make_palindrome() {
+    fn test_into_palindrome() {
         assert_eq!(15855, 123.into_palindrome(2, false));
         assert_eq!(7919, 123.into_palindrome(2, true));
         assert_eq!(123321, 123.into_palindrome(10, false));

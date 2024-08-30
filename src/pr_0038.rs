@@ -1,8 +1,6 @@
 use iter::count_digits_in_number;
 pub struct Euler;
 
-const PANDIGITAL_SUM: usize = 45;
-
 impl Euler {
     pub fn pandigital_multiples(search_space: usize) -> usize {
         let mut max_pandigital = 0;

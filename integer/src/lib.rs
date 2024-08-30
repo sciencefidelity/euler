@@ -1,10 +1,32 @@
 #![allow(clippy::cast_lossless, clippy::cast_precision_loss)]
 
 pub trait Integer<T> {
+    /// The maximum pandigital number that an integer type can hold.
     const MAX_PANDIGITAL: Self;
 
+    /// Check if an integer is pandigital.
+    ///
+    /// An _n_-digit number is pandigital if it makes use of all the digits 1 to _n_ exactly once;
+    /// for example, the 5-digit number, 15234, is 1 through 5 pandigital.
+    ///
+    /// ```rust
+    /// # use integer::Integer;
+    /// assert!(15_234_i32.is_pandigital());
+    /// ```
     fn is_pandigital(&self) -> bool;
 
+    /// Check if an integer is a triangle number.
+    ///
+    /// The first 10 triangle numbers are 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+    /// The nth term of the sequence can be expressed as `t = n(n + 1) / 2`.
+    /// We can rearrange the equation to use a standard quadratic form `n.pow(2) + n - 2t = 0`
+    /// and use the quadratic formula to solve it.
+    /// If `(1 + 8t).sqrt()` is a perfect square we get an integer value for `n`.
+    ///
+    /// ```rust
+    /// # use integer::Integer;
+    /// assert!(55_i32.is_triangle());
+    /// ```
     fn is_triangle(&self) -> bool;
 }
 
@@ -54,7 +76,6 @@ macro_rules! uint_impl {
                 has_digits[0] = true;
                 while n != 0 {
                     let tmp = usize::try_from(n % 10).unwrap();
-                    println!("{tmp}");
                     if has_digits[tmp] == true {
                         return false;
                     }
