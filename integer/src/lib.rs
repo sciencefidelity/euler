@@ -15,6 +15,8 @@ pub trait Integer<T> {
     /// ```
     fn is_pandigital(&self) -> bool;
 
+    fn is_zero_nine_pandigital(&self) -> bool;
+
     /// Check if an integer is a triangle number.
     ///
     /// The first 10 triangle numbers are 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
@@ -53,6 +55,19 @@ macro_rules! int_impl {
                 !has_digits[1..=len].contains(&false)
             }
 
+            fn is_zero_nine_pandigital(&self) -> bool {
+                let (mut n, mut has_digits) = (*self, [false; 10]);
+                while n != 0 {
+                    let tmp = usize::try_from(n % 10).unwrap();
+                    if has_digits[tmp] == true {
+                        return false;
+                    }
+                    has_digits[tmp] = true;
+                    n /= 10;
+                }
+                !has_digits.contains(&false)
+            }
+
             fn is_triangle(&self) -> bool {
                 if *self <= 0 {
                     return false;
@@ -84,6 +99,19 @@ macro_rules! uint_impl {
                     len += 1;
                 }
                 !has_digits[1..=len].contains(&false)
+            }
+
+            fn is_zero_nine_pandigital(&self) -> bool {
+                let (mut n, mut has_digits) = (*self, [false; 10]);
+                while n != 0 {
+                    let tmp = usize::try_from(n % 10).unwrap();
+                    if has_digits[tmp] == true {
+                        return false;
+                    }
+                    has_digits[tmp] = true;
+                    n /= 10;
+                }
+                !has_digits.contains(&false)
             }
 
             fn is_triangle(&self) -> bool {
@@ -236,5 +264,12 @@ mod tests {
         assert!(!56_u64.is_triangle());
         assert!(!67_u128.is_triangle());
         assert!(!79_usize.is_triangle());
+    }
+
+    #[test]
+    fn test_is_zero_nine_pandigital() {
+        assert!(1234567890_i32.is_zero_nine_pandigital());
+        assert!(!123456789_i32.is_zero_nine_pandigital());
+        assert!(!1234567891_i32.is_zero_nine_pandigital());
     }
 }
