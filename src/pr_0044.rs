@@ -1,9 +1,9 @@
-use seq::pentagonal;
+use seq::figurative::pentagonal;
 
 pub struct Euler;
 
 impl Euler {
-    pub fn pentagonal_numbers() -> i32 {
+    pub fn pentagonal_numbers() -> i64 {
         let mut nums = vec![1, 5, 12];
         for pn in pentagonal() {
             nums.push(pn);
@@ -17,7 +17,8 @@ impl Euler {
         0
     }
 
-    fn is_pentagonal(x: i32) -> bool {
+    #[allow(clippy::cast_precision_loss, clippy::float_cmp)]
+    fn is_pentagonal(x: i64) -> bool {
         let r = ((1 + 24 * x) as f64).sqrt();
         r % 6.0 == 5.0
     }

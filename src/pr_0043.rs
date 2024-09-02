@@ -10,8 +10,8 @@ impl Euler {
     }
 
     fn backtrack(result: &mut u64, pan: &mut Vec<u64>) {
-        if pan.len() == 10 && Self::is_sub_string_divisible(&pan) {
-            *result += Self::join(&pan);
+        if pan.len() == 10 && Self::is_sub_string_divisible(pan) {
+            *result += Self::join(pan);
         }
         for i in 0..=9 {
             if pan.contains(&i) {
