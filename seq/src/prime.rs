@@ -18,20 +18,24 @@ pub fn is_prime(n: usize) -> bool {
     }
 }
 
+// We set index zero to zero because lists of prime numbers list nth prime 1 as 2, etc.
+// This means that many consumers will need to call `skip(1)` to prevent some errors,
+// it also means that calling `prime().nth(n)` returns the expected value.
 pub fn prime() -> impl Iterator<Item = usize> {
-    let mut state = (2, 3, 5, 7, 0);
+    // key to state initial values = (index, prime 1, prime 2, prime 3, prime 4).
+    let mut state = (0, 2, 3, 5, 7);
     std::iter::from_fn(move || {
-        let prime = if state.4 == 0 { 0 } else { state.0 };
-        if state.4 != 0 {
-            state.0 = state.1;
+        let mut prime = 0;
+        if state.0 != 0 {
+            (prime, state.1) = (state.1, state.2);
             loop {
-                (state.1, state.2, state.3) = (state.2, state.3, state.1 + 6);
-                if crate::prime::is_prime(state.1) {
+                (state.2, state.3, state.4) = (state.3, state.4, state.2 + 6);
+                if crate::prime::is_prime(state.2) {
                     break;
                 }
             }
         }
-        state.4 += 1;
+        state.0 += 1;
         Some(prime)
     })
 }
