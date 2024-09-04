@@ -4,6 +4,8 @@ pub trait Integer<T> {
     /// The maximum pandigital number that an integer type can hold.
     const MAX_PANDIGITAL: Self;
 
+    fn is_prime(&self) -> bool;
+
     /// Check if an integer is pandigital.
     ///
     /// An _n_-digit number is pandigital if it makes use of all the digits 1 to _n_ exactly once;
@@ -36,6 +38,20 @@ macro_rules! int_impl {
     ($t:ty, $max:expr) => {
         impl Integer<$t> for $t {
             const MAX_PANDIGITAL: Self = $max;
+
+            #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+            fn is_prime(&self) -> bool {
+                if *self < 4 {
+                    *self > 1
+                } else if self % 2 == 0 || self % 3 == 0 {
+                    false
+                } else {
+                    let max_p = (*self as f64).sqrt().ceil() as $t;
+                    !(5..=max_p)
+                        .step_by(6)
+                        .any(|p| self % p == 0 || self % (p + 2) == 0)
+                }
+            }
 
             fn is_pandigital(&self) -> bool {
                 let (mut n, mut has_digits, mut len) = (self.saturating_abs(), [false; 10], 0);
@@ -82,6 +98,20 @@ macro_rules! uint_impl {
     ($t:ty, $max:expr) => {
         impl Integer<$t> for $t {
             const MAX_PANDIGITAL: Self = $max;
+
+            #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+            fn is_prime(&self) -> bool {
+                if *self < 4 {
+                    *self > 1
+                } else if self % 2 == 0 || self % 3 == 0 {
+                    false
+                } else {
+                    let max_p = (*self as f64).sqrt().ceil() as $t;
+                    !(5..=max_p)
+                        .step_by(6)
+                        .any(|p| self % p == 0 || self % (p + 2) == 0)
+                }
+            }
 
             fn is_pandigital(&self) -> bool {
                 let (mut n, mut has_digits, mut len) = (*self, [false; 10], 0);
@@ -268,8 +298,24 @@ mod tests {
 
     #[test]
     fn test_is_zero_nine_pandigital() {
-        assert!(1234567890_i32.is_zero_nine_pandigital());
-        assert!(!123456789_i32.is_zero_nine_pandigital());
-        assert!(!1234567891_i32.is_zero_nine_pandigital());
+        assert!(1_234_567_890_i32.is_zero_nine_pandigital());
+        assert!(!123_456_789_i32.is_zero_nine_pandigital());
+        assert!(!1_234_567_891_i32.is_zero_nine_pandigital());
+    }
+
+    #[test]
+    fn test_is_prime() {
+        assert!(127_i8.is_prime());
+        assert!(32_749_i16.is_prime());
+        assert!(2_147_483_629_i32.is_prime());
+        assert!(99_999_999_977_i64.is_prime());
+        assert!(99_999_999_947_i128.is_prime());
+        assert!(99_999_999_943_isize.is_prime());
+        assert!(251_u8.is_prime());
+        assert!(65_521_u16.is_prime());
+        assert!(4_294_967_291_u32.is_prime());
+        assert!(99_999_999_907_u64.is_prime());
+        assert!(99_999_999_871_u128.is_prime());
+        assert!(99_999_999_851_usize.is_prime());
     }
 }

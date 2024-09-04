@@ -1,20 +1,20 @@
+use integer::Integer;
 use iter::count_digits_in_number;
-use seq::prime::{is_prime, Prime};
+use seq::prime::prime;
 
 pub struct Euler;
 
 impl Euler {
-    pub fn truncatable_primes(mut n: i32) -> i32 {
-        let p: Prime<i32> = Prime::new();
+    pub fn truncatable_primes(mut n: usize) -> usize {
         let mut sum = 0;
-        for prime in p.into_iter().skip(4) {
+        for prime in prime().skip(5) {
             let len = count_digits_in_number(prime);
             if Self::truncate_r_to_l(prime / 10)
                 && Self::truncate_l_to_r(prime, u32::try_from(len - 1).unwrap())
             {
                 sum += prime;
                 n -= 1;
-                if n <= 0 {
+                if n == 0 {
                     break;
                 }
             }
@@ -22,9 +22,9 @@ impl Euler {
         sum
     }
 
-    fn truncate_r_to_l(mut n: i32) -> bool {
+    fn truncate_r_to_l(mut n: usize) -> bool {
         while n > 0 {
-            if !is_prime(n) {
+            if !n.is_prime() {
                 return false;
             }
             n /= 10;
@@ -32,9 +32,9 @@ impl Euler {
         true
     }
 
-    fn truncate_l_to_r(n: i32, mut i: u32) -> bool {
+    fn truncate_l_to_r(n: usize, mut i: u32) -> bool {
         while i > 0 {
-            if !is_prime(n % 10_i32.pow(i)) {
+            if !(n % 10_usize.pow(i)).is_prime() {
                 return false;
             }
             i -= 1;

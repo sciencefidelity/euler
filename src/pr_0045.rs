@@ -4,7 +4,7 @@ use std::collections::HashSet;
 pub struct Euler;
 
 impl Euler {
-    pub fn triangular_pentagonal_and_hexagonal(mut k: i32) -> i64 {
+    pub fn triangular_pentagonal_and_hexagonal(mut k: i32) -> usize {
         let mut pentagonals = HashSet::new();
         let mut hexagonals = HashSet::new();
         for ((t, p), h) in triangle().zip(pentagonal()).zip(hexagonal()).skip(1) {

@@ -1,12 +1,11 @@
-pub use seq::Fibonacci;
+pub use seq::fibonacci::fibonacci;
 
 pub struct Euler;
 
 impl Euler {
     pub fn even_fibonacci_numbers(limit: usize) -> usize {
-        let fib: Fibonacci<usize> = Fibonacci::new();
         let mut sum = 0;
-        for num in fib {
+        for num in fibonacci() {
             if num > limit {
                 break;
             }

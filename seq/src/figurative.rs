@@ -1,4 +1,4 @@
-pub fn triangle() -> impl Iterator<Item = i64> {
+pub fn triangle() -> impl Iterator<Item = usize> {
     let mut state = 1;
     std::iter::from_fn(move || {
         let tri = state * (state + 1) / 2;
@@ -7,7 +7,7 @@ pub fn triangle() -> impl Iterator<Item = i64> {
     })
 }
 
-pub fn pentagonal() -> impl Iterator<Item = i64> {
+pub fn pentagonal() -> impl Iterator<Item = usize> {
     let mut state = 1;
     std::iter::from_fn(move || {
         let pent = state * (3 * state - 1) / 2;
@@ -16,7 +16,7 @@ pub fn pentagonal() -> impl Iterator<Item = i64> {
     })
 }
 
-pub fn hexagonal() -> impl Iterator<Item = i64> {
+pub fn hexagonal() -> impl Iterator<Item = usize> {
     let mut state = 1;
     std::iter::from_fn(move || {
         let hex = state * (2 * state - 1);

@@ -3,13 +3,13 @@ use seq::figurative::pentagonal;
 pub struct Euler;
 
 impl Euler {
-    pub fn pentagonal_numbers() -> i64 {
+    pub fn pentagonal_numbers() -> usize {
         let mut nums = vec![1, 5, 12];
         for pn in pentagonal() {
             nums.push(pn);
             for b in &nums {
                 let a = pn - b;
-                if Self::is_pentagonal(a) && Self::is_pentagonal((a - b).abs()) {
+                if Self::is_pentagonal(a) && Self::is_pentagonal(a - b) {
                     return a - b;
                 }
             }
@@ -18,7 +18,7 @@ impl Euler {
     }
 
     #[allow(clippy::cast_precision_loss, clippy::float_cmp)]
-    fn is_pentagonal(x: i64) -> bool {
+    fn is_pentagonal(x: usize) -> bool {
         let r = ((1 + 24 * x) as f64).sqrt();
         r % 6.0 == 5.0
     }

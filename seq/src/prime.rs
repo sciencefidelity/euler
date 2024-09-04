@@ -1,92 +1,39 @@
-use num_traits::PrimInt;
-
-pub struct Prime<N> {
-    curr: N,
-    next: N,
-    trial1: N,
-    trial2: N,
-}
-
-impl<N> Prime<N>
-where
-    N: PrimInt,
-{
-    #[must_use]
-    pub fn new() -> Self {
-        let one = N::one();
-        let two = one + one;
-        let three = one + two;
-        let five = two + three;
-        let seven = five + two;
-        Self {
-            curr: two,
-            next: three,
-            trial1: five,
-            trial2: seven,
-        }
+#[allow(
+    clippy::module_name_repetitions,
+    clippy::cast_possible_truncation,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss
+)]
+#[must_use]
+pub fn is_prime(n: usize) -> bool {
+    if n < 4 {
+        n > 1
+    } else if n % 2 == 0 || n % 3 == 0 {
+        false
+    } else {
+        let max_p = (n as f64).sqrt().ceil() as usize;
+        !(5..=max_p)
+            .step_by(6)
+            .any(|p| n % p == 0 || n % (p + 2) == 0)
     }
 }
 
-impl<N> Iterator for Prime<N>
-where
-    N: PrimInt,
-{
-    type Item = N;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        let one = N::one();
-        let two = one + one;
-        let three = one + two;
-        let six = three + three;
-        let prime = self.curr;
-        self.curr = self.next;
-        loop {
-            self.next = self.trial1;
-            self.trial1 = self.trial2;
-            self.trial2 = self.next + six;
-            if is_prime(self.next) {
-                break;
+pub fn prime() -> impl Iterator<Item = usize> {
+    let mut state = (2, 3, 5, 7, 0);
+    std::iter::from_fn(move || {
+        let prime = if state.4 == 0 { 0 } else { state.0 };
+        if state.4 != 0 {
+            state.0 = state.1;
+            loop {
+                (state.1, state.2, state.3) = (state.2, state.3, state.1 + 6);
+                if crate::prime::is_prime(state.1) {
+                    break;
+                }
             }
         }
+        state.4 += 1;
         Some(prime)
-    }
-}
-
-impl<N> Default for Prime<N>
-where
-    N: PrimInt,
-{
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-#[allow(clippy::module_name_repetitions)]
-pub fn is_prime<N: PrimInt>(candidate: N) -> bool {
-    let (zero, one) = (N::zero(), N::one());
-    let two = one + one;
-    let three = one + two;
-    if candidate <= one {
-        return false;
-    }
-    if [two, three].contains(&candidate) {
-        return true;
-    }
-    if candidate % two == zero {
-        return false;
-    }
-    let try_limit = candidate / two;
-    let mut n = three;
-    loop {
-        if candidate % n == zero {
-            return false;
-        }
-        if n <= try_limit {
-            n = n + two;
-        } else {
-            return true;
-        }
-    }
+    })
 }
 
 #[cfg(test)]
@@ -95,7 +42,8 @@ mod tests {
 
     #[test]
     fn test_prime_iter() {
-        let mut primes: Prime<i32> = Prime::new();
+        let mut primes = prime().take(12);
+        assert_eq!(primes.next(), Some(0));
         assert_eq!(primes.next(), Some(2));
         assert_eq!(primes.next(), Some(3));
         assert_eq!(primes.next(), Some(5));
@@ -107,5 +55,11 @@ mod tests {
         assert_eq!(primes.next(), Some(23));
         assert_eq!(primes.next(), Some(29));
         assert_eq!(primes.next(), Some(31));
+        assert_eq!(primes.next(), None);
+    }
+
+    #[test]
+    fn test_is_prime() {
+        assert!(is_prime(1_000_000_005_721));
     }
 }

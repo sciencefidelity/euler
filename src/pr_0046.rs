@@ -1,24 +1,28 @@
-use seq::prime::{is_prime, Prime};
+use integer::Integer;
+use seq::prime::prime;
+use std::cmp::Ordering;
+
 pub struct Euler;
 
 impl Euler {
-    pub fn goldbachs_other_conjecture() -> i32 {
+    pub fn goldbachs_other_conjecture() -> usize {
         let mut n = 35;
         let mut found = false;
         loop {
             if Self::is_odd_composite(n) {
-                let primes: Prime<i32> = Prime::new();
-                for p in primes {
+                for p in prime().skip(1) {
                     if p > n + 2 {
                         return n;
                     }
                     for i in 1..=(n - p + 2) {
                         let conj = p + 2 * i.pow(2);
-                        if conj == n {
-                            found = true;
-                            break;
-                        } else if conj > n {
-                            break;
+                        match conj.cmp(&n) {
+                            Ordering::Less => {}
+                            Ordering::Equal => {
+                                found = true;
+                                break;
+                            }
+                            Ordering::Greater => break,
                         }
                     }
                     if found {
@@ -31,12 +35,8 @@ impl Euler {
         }
     }
 
-    fn is_odd_composite(n: i32) -> bool {
-        if n % 2 != 0 && !is_prime(n) {
-            true
-        } else {
-            false
-        }
+    fn is_odd_composite(n: usize) -> bool {
+        n % 2 != 0 && !n.is_prime()
     }
 }
 

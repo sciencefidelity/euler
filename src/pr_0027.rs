@@ -1,3 +1,5 @@
+use integer::Integer;
+
 pub struct Euler;
 
 impl Euler {
@@ -8,7 +10,7 @@ impl Euler {
                 let (mut n, mut primes) = (0_i32, 0);
                 loop {
                     let candidate = (n.pow(2) + (a * n) + b).abs();
-                    if Self::is_prime(candidate) {
+                    if candidate.is_prime() {
                         primes += 1;
                     } else {
                         if primes > max_primes {
@@ -20,35 +22,7 @@ impl Euler {
                 }
             }
         }
-        println!("{max_primes}");
         a_best * b_best
-    }
-
-    fn is_prime(candidate: i32) -> bool {
-        if candidate == 1 {
-            return false;
-        } else if candidate < 4 {
-            return true;
-        } else if candidate % 2 == 0 {
-            return false;
-        } else if candidate < 9 {
-            return true;
-        } else if candidate % 3 == 0 {
-            return false;
-        }
-        #[allow(clippy::cast_possible_truncation)]
-        let r = f64::from(candidate).sqrt().floor() as i32;
-        let mut f = 5;
-        while f <= r {
-            if candidate % f == 0 {
-                return false;
-            }
-            if candidate % (f + 2) == 0 {
-                return false;
-            }
-            f += 6;
-        }
-        true
     }
 }
 

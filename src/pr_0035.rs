@@ -1,13 +1,12 @@
 use iter::Rotate;
-use seq::{prime::is_prime, Prime};
+use seq::prime::{is_prime, prime};
 
 pub struct Euler;
 
 impl Euler {
-    pub fn circular_primes(target: i32) -> usize {
+    pub fn circular_primes(target: usize) -> usize {
         let mut result = 0;
-        let primes: Prime<i32> = Prime::new();
-        for prime in primes {
+        for prime in prime().skip(1) {
             if prime >= target {
                 break;
             }

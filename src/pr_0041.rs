@@ -1,14 +1,13 @@
 use integer::Integer;
-use seq::prime::is_prime;
 
 pub struct Euler;
 
-const MAX_PANDIGITAL: i32 = 987_654_321;
+const MAX_PANDIGITAL: usize = 987_654_321;
 
 impl Euler {
-    pub fn pandigital_prime() -> i32 {
+    pub fn pandigital_prime() -> usize {
         for n in (0..=MAX_PANDIGITAL).rev() {
-            if n.is_pandigital() && is_prime(n) {
+            if n.is_pandigital() && n.is_prime() {
                 return n;
             }
         }
