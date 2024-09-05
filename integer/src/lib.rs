@@ -4,6 +4,8 @@ pub trait Integer<T> {
     /// The maximum pandigital number that an integer type can hold.
     const MAX_PANDIGITAL: Self;
 
+    // fn len(&self) -> T;
+
     fn is_prime(&self) -> bool;
 
     /// Check if an integer is pandigital.
