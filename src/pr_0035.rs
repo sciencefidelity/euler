@@ -1,4 +1,4 @@
-use iter::Rotate;
+use integer::Integer;
 use seq::prime::{is_prime, prime};
 
 pub struct Euler;
@@ -10,13 +10,12 @@ impl Euler {
             if prime >= target {
                 break;
             }
-            let p = Rotate::new(prime);
-            let n = p.len();
+            let n = prime.len();
             if n == 1 {
                 result += 1;
                 continue;
             }
-            if p.into_iter().take(n - 1).all(is_prime) {
+            if prime.rotate().take(n - 1).all(is_prime) {
                 result += 1;
             }
         }

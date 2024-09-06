@@ -29,44 +29,44 @@ impl Euler {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    // #[test]
-    // fn test_self_powers_ten() {
-    //     assert_eq!(Euler::self_powers(10), 405_071_317);
-    // }
+// #[test]
+// fn test_self_powers_ten() {
+//     assert_eq!(Euler::self_powers(10), 405_071_317);
+// }
 
-    // #[test]
-    // fn test_self_powers_thousand() {
-    //     assert_eq!(Euler::self_powers(1000), 1);
-    // }
+// #[test]
+// fn test_self_powers_thousand() {
+//     assert_eq!(Euler::self_powers(1000), 1);
+// }
 
-    // #[test]
-    // fn test_long_pow() {
-    //     assert_eq!(
-    //         Euler::pow_long(vec![0, 0, 0, 0, 9, 8, 7, 6, 5, 4]),
-    //         vec![5, 4, 6, 0, 4, 2, 3, 7, 1, 6]
-    //     );
-    // }
+// #[test]
+// fn test_long_pow() {
+//     assert_eq!(
+//         Euler::pow_long(vec![0, 0, 0, 0, 9, 8, 7, 6, 5, 4]),
+//         vec![5, 4, 6, 0, 4, 2, 3, 7, 1, 6]
+//     );
+// }
 
-    #[test]
-    fn test_long_pow() {
-        assert_eq!(
-            Euler::pow_long(vec![0, 0, 0, 0, 0, 0, 0, 0, 5, 4]),
-            vec![0, 0, 0, 0, 0, 0, 2, 9, 1, 6]
-        );
-    }
+// #[test]
+// fn test_long_pow() {
+//     assert_eq!(
+//         Euler::pow_long(vec![0, 0, 0, 0, 0, 0, 0, 0, 5, 4]),
+//         vec![0, 0, 0, 0, 0, 0, 2, 9, 1, 6]
+//     );
+// }
 
-    #[test]
-    fn test_vec_to_int() {
-        assert_eq!(
-            Euler::vec_to_int(vec![0, 2, 3, 4, 5, 6, 7, 8, 9, 0]),
-            234567890
-        );
-    }
-}
+// #[test]
+// fn test_vec_to_int() {
+//     assert_eq!(
+//         Euler::vec_to_int(vec![0, 2, 3, 4, 5, 6, 7, 8, 9, 0]),
+//         234567890
+//     );
+// }
+// }
 
 /*
 

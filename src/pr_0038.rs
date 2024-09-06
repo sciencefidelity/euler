@@ -1,4 +1,4 @@
-use iter::count_digits_in_number;
+use integer::Integer;
 pub struct Euler;
 
 impl Euler {
@@ -12,7 +12,7 @@ impl Euler {
     }
 
     fn is_pandigital(mut n: usize) -> bool {
-        if count_digits_in_number(n) != 9 {
+        if n.len() != 9 {
             return false;
         }
         let dict = &mut [0; 10];
@@ -32,8 +32,8 @@ impl Euler {
         let mut concat = 0;
         for j in 1..=9 {
             let prod = n * j;
-            let len = count_digits_in_number(prod);
-            if count_digits_in_number(concat) > 9 {
+            let len = prod.len();
+            if concat.len() > 9 {
                 return 0;
             }
             if j != 1 {

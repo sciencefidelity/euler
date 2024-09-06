@@ -5,12 +5,13 @@ use std::cmp::Ordering;
 pub struct Euler;
 
 impl Euler {
-    pub fn goldbachs_other_conjecture() -> usize {
+    pub fn goldbachs_other_conjecture() -> i32 {
         let mut n = 35;
         let mut found = false;
         loop {
             if Self::is_odd_composite(n) {
                 for p in prime().skip(1) {
+                    let p = i32::try_from(p).unwrap();
                     if p > n + 2 {
                         return n;
                     }
@@ -35,7 +36,7 @@ impl Euler {
         }
     }
 
-    fn is_odd_composite(n: usize) -> bool {
+    fn is_odd_composite(n: i32) -> bool {
         n % 2 != 0 && !n.is_prime()
     }
 }

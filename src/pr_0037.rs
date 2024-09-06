@@ -1,5 +1,4 @@
 use integer::Integer;
-use iter::count_digits_in_number;
 use seq::prime::prime;
 
 pub struct Euler;
@@ -8,7 +7,7 @@ impl Euler {
     pub fn truncatable_primes(mut n: usize) -> usize {
         let mut sum = 0;
         for prime in prime().skip(5) {
-            let len = count_digits_in_number(prime);
+            let len = prime.len();
             if Self::truncate_r_to_l(prime / 10)
                 && Self::truncate_l_to_r(prime, u32::try_from(len - 1).unwrap())
             {

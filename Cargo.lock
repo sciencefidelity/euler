@@ -29,6 +29,7 @@ version = "0.1.0"
 name = "iter"
 version = "0.1.0"
 dependencies = [
+ "integer",
  "math",
  "num-traits",
 ]
