@@ -20,7 +20,7 @@ impl Euler {
 
     #[allow(clippy::cast_precision_loss, clippy::float_cmp)]
     fn is_pentagonal(x: i32) -> bool {
-        let r = ((1 + 24 * x) as f64).sqrt();
+        let r = (f64::from(1 + 24 * x)).sqrt();
         r % 6.0 == 5.0
     }
 }
