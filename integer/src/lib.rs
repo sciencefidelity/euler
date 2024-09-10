@@ -39,6 +39,8 @@ pub trait Integer: Sized {
     fn is_triangle(&self) -> bool;
 
     fn rotate(&self) -> impl Iterator<Item = Self>;
+
+    fn digits(self) -> Vec<Self>;
 }
 
 macro_rules! int_impl {
@@ -138,6 +140,15 @@ macro_rules! int_impl {
                     Some(current)
                 })
             }
+
+            fn digits(mut self) -> Vec<$t> {
+                let mut result = Vec::with_capacity(self.len());
+                while self > 0 {
+                    result.push(self % 10);
+                    self /= 10;
+                }
+                result
+            }
         }
     };
 }
@@ -234,6 +245,15 @@ macro_rules! uint_impl {
                     current += rem * multiplier.pow(n - 1);
                     Some(current)
                 })
+            }
+
+            fn digits(mut self) -> Vec<$t> {
+                let mut result = Vec::with_capacity(self.len());
+                while self > 0 {
+                    result.push(self % 10);
+                    self /= 10;
+                }
+                result
             }
         }
     };
@@ -439,5 +459,10 @@ mod tests {
         assert_eq!(iter.next(), Some((7, 32154)));
         assert_eq!(iter.next(), Some((8, 43215)));
         assert_eq!(iter.next(), Some((9, 54321)));
+    }
+
+    #[test]
+    fn test_digits() {
+        assert_eq!(54_321.digits(), vec![1, 2, 3, 4, 5]);
     }
 }
