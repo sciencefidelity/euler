@@ -54,4 +54,5 @@ pub mod pr_0047;
 pub mod pr_0048;
 pub mod pr_0049;
 pub mod pr_0050;
+pub mod pr_0052;
 pub mod pr_0067;
