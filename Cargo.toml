@@ -1,9 +1,35 @@
 [package]
 name = "euler"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+description.workspace = true
+readme.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[workspace]
+members = [
+  "crates/integer",
+  "crates/iter",
+  "crates/math",
+  "crates/parse",
+  "crates/seq",
+  "crates/traits",
+  "crates/utils",
+]
+resolver = "2"
+
+[workspace.package]
 version = "0.1.0"
 edition = "2021"
+authors = ["Matt Cook <matt@mattcook.dev>"]
+description = "Solutions to Project Euler problems"
+readme = "README.md"
+repository = "https://github.com/sciencefidelity/euler"
+license = "MIT or Apache-2.0"
 
-[lints.clippy]
+[workspace.lints.clippy]
 enum_glob_use = "deny"
 pedantic = { level = "deny", priority = 1 }
 nursery = { level = "deny", priority = 2 }
@@ -17,10 +43,10 @@ panic = "abort"
 strip = "symbols"
 
 [dependencies]
-integer = { path = "integer" }
-iter = { path = "iter" }
-math = { path = "math" }
-parse = { path = "parse" }
-seq = { path = "seq" }
-traits = { path = "traits" }
-utils = { path = "utils" }
+integer = { path = "crates/integer" }
+iter = { path = "crates/iter" }
+math = { path = "crates/math" }
+parse = { path = "crates/parse" }
+seq = { path = "crates/seq" }
+traits = { path = "crates/traits" }
+utils = { path = "crates/utils" }

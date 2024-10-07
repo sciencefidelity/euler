@@ -44,9 +44,9 @@ impl Euler {
 
     fn join(vec: &[usize]) -> usize {
         let mut result = 0;
-        for i in vec.into_iter() {
+        for i in vec.iter() {
             result *= 10_000;
-            result += usize::try_from(*i).unwrap();
+            result += *i;
         }
         result
     }

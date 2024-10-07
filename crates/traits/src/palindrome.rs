@@ -22,6 +22,7 @@ pub trait Palindrome {
     /// assert_eq!(123.into_palindrome(10, false), 123_321);
     /// assert_eq!(123.into_palindrome(10, true), 12_321);
     /// ```
+    #[must_use]
     fn into_palindrome(self, base: Self, odd_length: bool) -> Self;
 }
 

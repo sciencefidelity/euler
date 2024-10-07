@@ -1,3 +1,4 @@
+#![allow(clippy::missing_panics_doc, clippy::unwrap_used)]
 use integer::Integer;
 
 pub fn rotate(num: usize) -> impl Iterator<Item = usize> {
@@ -7,7 +8,7 @@ pub fn rotate(num: usize) -> impl Iterator<Item = usize> {
         let multiplier: usize = 10;
         let rem = current % 10;
         current /= 10;
-        current = rem * multiplier.pow(n - 1) + current;
+        current += rem * multiplier.pow(n - 1);
         Some(current)
     })
 }
