@@ -1,13 +1,9 @@
 use std::cmp::Ordering;
 
-pub struct Euler;
-
-impl Euler {
-    pub fn coin_sums(candidates: &[i32], target: i32) -> i32 {
-        let mut coin_sums = CoinSums::new(candidates, target);
-        coin_sums.backtrack(target, 0);
-        coin_sums.count
-    }
+pub fn coin_sums(candidates: &[i32], target: i32) -> i32 {
+    let mut coin_sums = CoinSums::new(candidates, target);
+    coin_sums.backtrack(target, 0);
+    coin_sums.count
 }
 
 struct CoinSums<'a> {
@@ -45,7 +41,7 @@ mod tests {
     const COINS: [i32; 8] = [1, 2, 5, 10, 20, 50, 100, 200];
 
     #[test]
-    fn case_1() {
-        assert_eq!(Euler::coin_sums(&COINS, 200), 73_682);
+    fn test_coin_sums() {
+        assert_eq!(coin_sums(&COINS, 200), 73_682);
     }
 }

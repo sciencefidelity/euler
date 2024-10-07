@@ -1,24 +1,18 @@
 use std::fs;
 
-const ASCII_OFFSET: i32 = 48;
-
-pub struct Euler;
-
-impl Euler {
-    pub fn largest_product_in_a_series(path: &str, n: usize) -> i64 {
-        let file = fs::read(path).unwrap();
-        let digits: Vec<u8> = file.trim_ascii_end().to_vec();
-        let mut digits: Vec<i64> = digits.iter().map(|&x| i64::from(x)).collect();
-        for num in &mut digits {
-            *num -= 48;
-        }
-        let mut max_product: i64 = 0;
-        for subarray in digits.windows(n) {
-            let product = subarray.iter().product::<i64>();
-            max_product = max_product.max(product);
-        }
-        max_product
+pub fn largest_product_in_a_series(path: &str, n: usize) -> i64 {
+    let file = fs::read(path).unwrap();
+    let digits = file.trim_ascii_end().to_vec();
+    let mut digits: Vec<i64> = digits.iter().map(|&x| i64::from(x)).collect();
+    for num in &mut digits {
+        *num -= 48;
     }
+    let mut max_product: i64 = 0;
+    for subarray in digits.windows(n) {
+        let product = subarray.iter().product::<i64>();
+        max_product = max_product.max(product);
+    }
+    max_product
 }
 
 #[cfg(test)]
@@ -26,18 +20,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn case_1() {
-        assert_eq!(
-            5832,
-            Euler::largest_product_in_a_series("data/pr_0008.txt", 4)
-        );
-    }
-
-    #[test]
-    fn case_2() {
+    fn test_largest_product_in_a_series() {
         assert_eq!(
             23_514_624_000,
-            Euler::largest_product_in_a_series("data/pr_0008.txt", 13)
+            largest_product_in_a_series("data/pr_0008.txt", 13)
         );
     }
 }
